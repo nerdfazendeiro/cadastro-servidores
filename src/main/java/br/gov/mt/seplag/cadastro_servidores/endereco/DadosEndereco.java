@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosEndereco(
         @NotBlank
-        String tipo_logradouro,
+        String tipoLogradouro,
         @NotBlank
         String logradouro,
         int numero,

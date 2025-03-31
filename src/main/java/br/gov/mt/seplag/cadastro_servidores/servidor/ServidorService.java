@@ -1,9 +1,11 @@
 package br.gov.mt.seplag.cadastro_servidores.servidor;
 
 import br.gov.mt.seplag.cadastro_servidores.endereco.Cidade;
+import br.gov.mt.seplag.cadastro_servidores.endereco.DadosEndereco;
 import br.gov.mt.seplag.cadastro_servidores.endereco.Endereco;
 import br.gov.mt.seplag.cadastro_servidores.pessoa.Pessoa;
 import br.gov.mt.seplag.cadastro_servidores.pessoa.PessoaEndereco;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -77,5 +79,62 @@ public class ServidorService {
         ServidorTemporario servidor = servidorTemporarioRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return new DadosDetalhamentoServidorTemporario(servidor);
+    }
+
+    @Transactional
+    public void atualizar(DadosAtualizacaoServidor dados) {
+        switch (dados.tipo()) {
+            case EFETIVO -> atualizarEfetivo(dados);
+            case TEMPORARIO -> atualizarTemporario(dados);
+        }
+    }
+    private void atualizarEfetivo(DadosAtualizacaoServidor dados) {
+        ServidorEfetivo servidor = servidorEfetivoRepository.findById(dados.id())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Servidor efetivo com ID " + dados.id() + " não encontrado."));
+
+        Pessoa pessoa = servidor.getPessoa();
+        pessoa.setPesNome(dados.pessoa().nome());
+        pessoa.setPesDataNascimento(dados.pessoa().dataNascimento());
+        pessoa.setPesSexo(dados.pessoa().sexo());
+        pessoa.setPesMae(dados.pessoa().mae());
+        pessoa.setPesPai(dados.pessoa().pai());
+
+        pessoa.getEnderecos().clear();
+
+        for (DadosEndereco e : dados.enderecos()) {
+            Endereco endereco = new Endereco(e);
+            endereco.setCidade(new Cidade(e.cidade()));
+            PessoaEndereco pe = new PessoaEndereco();
+            pe.setPessoa(pessoa);
+            pe.setEndereco(endereco);
+            pessoa.getEnderecos().add(pe);
+        }
+
+        servidor.setSeMatricula(dados.matricula());
+    }
+    private void atualizarTemporario(DadosAtualizacaoServidor dados) {
+        ServidorTemporario servidor = servidorTemporarioRepository.findById(dados.id())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Servidor efetivo com ID " + dados.id() + " não encontrado."));
+
+        Pessoa pessoa = servidor.getPessoa();
+        pessoa.setPesNome(dados.pessoa().nome());
+        pessoa.setPesDataNascimento(dados.pessoa().dataNascimento());
+        pessoa.setPesSexo(dados.pessoa().sexo());
+        pessoa.setPesMae(dados.pessoa().mae());
+        pessoa.setPesPai(dados.pessoa().pai());
+
+        pessoa.getEnderecos().clear();
+
+        for (DadosEndereco e : dados.enderecos()) {
+            Endereco endereco = new Endereco(e);
+            endereco.setCidade(new Cidade(e.cidade()));
+            PessoaEndereco pe = new PessoaEndereco();
+            pe.setPessoa(pessoa);
+            pe.setEndereco(endereco);
+            pessoa.getEnderecos().add(pe);
+        }
+
+        servidor.setStDataAdmissao(dados.dataAdmissao());
+        servidor.setStDataDemissao(dados.dataDemissao());
     }
 }

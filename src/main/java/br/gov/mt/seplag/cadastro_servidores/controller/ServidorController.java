@@ -1,6 +1,7 @@
 package br.gov.mt.seplag.cadastro_servidores.controller;
 
 import br.gov.mt.seplag.cadastro_servidores.servidor.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ public class ServidorController {
     private ServidorService servidorService;
 
     @PostMapping
+    @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroServidor dados) {
         servidorService.cadastrar(dados);
     }
@@ -29,5 +31,12 @@ public class ServidorController {
     @GetMapping("/{tipo}/{id}")
     public ResponseEntity<?> buscarPorTipoEId(@PathVariable TipoServidor tipo, @PathVariable Long id) {
         return ResponseEntity.ok(servidorService.buscarPorTipoEId(tipo, id));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Void> atualizar(@RequestBody @Valid DadosAtualizacaoServidor dados) {
+        servidorService.atualizar(dados);
+        return ResponseEntity.noContent().build();
     }
 }

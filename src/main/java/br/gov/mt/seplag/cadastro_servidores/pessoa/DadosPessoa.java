@@ -12,7 +12,6 @@ public record DadosPessoa(
         String nome,
 
         @Past
-        @JsonProperty("data_nascimento")
         LocalDate dataNascimento,
 
         @NotNull

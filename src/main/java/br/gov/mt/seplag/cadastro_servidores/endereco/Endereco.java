@@ -24,7 +24,7 @@ public class Endereco {
     private Cidade cidade;
 
     public Endereco(DadosEndereco dadosEndereco) {
-        this.endTipoLogradouro = dadosEndereco.tipo_logradouro();
+        this.endTipoLogradouro = dadosEndereco.tipoLogradouro();
         this.endLogradouro = dadosEndereco.logradouro();
         this.endNumero = dadosEndereco.numero();
         this.endBairro = dadosEndereco.bairro();
