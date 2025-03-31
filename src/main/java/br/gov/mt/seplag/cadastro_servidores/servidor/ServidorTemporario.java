@@ -18,13 +18,13 @@ public class ServidorTemporario {
     private LocalDate stDataAdmissao;
     private LocalDate stDataDemissao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "pes_id")
     private Pessoa pessoa;
 
-    public ServidorTemporario(DadosCadastroServidor dados) {
-        this.pessoa = new Pessoa(dados.pessoa());
+    public ServidorTemporario(DadosCadastroServidor dados, Pessoa pessoa) {
+        this.pessoa = pessoa;
         this.stDataAdmissao = dados.dataAdmissao();
         this.stDataDemissao = dados.dataDemissao();
     }

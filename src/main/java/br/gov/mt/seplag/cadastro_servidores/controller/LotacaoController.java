@@ -3,6 +3,7 @@ package br.gov.mt.seplag.cadastro_servidores.controller;
 import br.gov.mt.seplag.cadastro_servidores.lotacao.DadosCadastroLotacao;
 import br.gov.mt.seplag.cadastro_servidores.lotacao.Lotacao;
 import br.gov.mt.seplag.cadastro_servidores.lotacao.LotacaoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class LotacaoController {
     private LotacaoRepository lotacaoRepository;
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroLotacao dados) {
+    public void cadastrar(@RequestBody @Valid DadosCadastroLotacao dados) {
         lotacaoRepository.save(new Lotacao(dados));
     }
 

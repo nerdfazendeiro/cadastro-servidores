@@ -19,7 +19,7 @@ public class PessoaEndereco {
     @JoinColumn(name = "pes_id")
     private Pessoa pessoa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "end_id")
     private Endereco endereco;
 }

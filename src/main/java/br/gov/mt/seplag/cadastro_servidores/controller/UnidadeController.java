@@ -3,6 +3,7 @@ package br.gov.mt.seplag.cadastro_servidores.controller;
 import br.gov.mt.seplag.cadastro_servidores.unidade.DadosCadastroUnidade;
 import br.gov.mt.seplag.cadastro_servidores.unidade.Unidade;
 import br.gov.mt.seplag.cadastro_servidores.unidade.UnidadeRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class UnidadeController {
     private UnidadeRepository unidadeRepository;
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroUnidade dados) {
+    public void cadastrar(@RequestBody @Valid DadosCadastroUnidade dados) {
         unidadeRepository.save(new Unidade(dados));
     }
 }

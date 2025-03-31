@@ -2,6 +2,9 @@ package br.gov.mt.seplag.cadastro_servidores.pessoa;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.*;
 
 
@@ -18,9 +21,15 @@ public class Pessoa {
 
     private String pesNome;
     private LocalDate pesDataNascimento;
+
+    @Enumerated(EnumType.STRING)
     private Sexo pesSexo;
+
     private String pesMae;
     private String pesPai;
+
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PessoaEndereco> enderecos = new ArrayList<>();
 
     public Pessoa(DadosPessoa dadosPessoa) {
         this.pesNome = dadosPessoa.nome();

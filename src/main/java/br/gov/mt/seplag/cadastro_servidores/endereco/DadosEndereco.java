@@ -1,4 +1,26 @@
 package br.gov.mt.seplag.cadastro_servidores.endereco;
 
-public record DadosEndereco(String tipo_logradouro, String logradouro, int numero, String bairro, DadosCidade cidade) {
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record DadosEndereco(
+        @NotBlank
+        String tipo_logradouro,
+        @NotBlank
+        String logradouro,
+        int numero,
+        @NotBlank
+        String bairro,
+        @NotNull @Valid
+        DadosCidade cidade) {
+        public DadosEndereco(Endereco endereco) {
+                this(
+                        endereco.getEndTipoLogradouro(),
+                        endereco.getEndLogradouro(),
+                        endereco.getEndNumero(),
+                        endereco.getEndBairro(),
+                        new DadosCidade(endereco.getCidade())
+                );
+        }
 }

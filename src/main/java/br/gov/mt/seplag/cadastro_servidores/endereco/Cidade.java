@@ -16,5 +16,10 @@ public class Cidade {
 
     private String cidNome;
     private String cidUf;
+
+    public Cidade(DadosCidade dadosCidade) {
+        this.cidNome = dadosCidade.nome();
+        this.cidUf = dadosCidade.uf();
+    }
 }
 

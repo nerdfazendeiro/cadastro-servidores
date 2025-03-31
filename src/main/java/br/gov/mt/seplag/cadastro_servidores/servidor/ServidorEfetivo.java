@@ -16,13 +16,13 @@ public class ServidorEfetivo {
 
     private String seMatricula;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "pes_id")
     private Pessoa pessoa;
 
-    public ServidorEfetivo(DadosCadastroServidor dados) {
-        this.pessoa = new Pessoa(dados.pessoa());
+    public ServidorEfetivo(DadosCadastroServidor dados, Pessoa pessoa) {
+        this.pessoa = pessoa;
         this.seMatricula = dados.matricula();
     }
 }

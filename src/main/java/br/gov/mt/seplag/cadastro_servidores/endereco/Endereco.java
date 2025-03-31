@@ -16,10 +16,17 @@ public class Endereco {
 
     private String endTipoLogradouro;
     private String endLogradouro;
-    private String endNumero;
+    private int endNumero;
     private String endBairro;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cid_id")
     private Cidade cidade;
+
+    public Endereco(DadosEndereco dadosEndereco) {
+        this.endTipoLogradouro = dadosEndereco.tipo_logradouro();
+        this.endLogradouro = dadosEndereco.logradouro();
+        this.endNumero = dadosEndereco.numero();
+        this.endBairro = dadosEndereco.bairro();
+    }
 }
