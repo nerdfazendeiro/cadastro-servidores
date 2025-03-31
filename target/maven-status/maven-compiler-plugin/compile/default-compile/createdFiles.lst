@@ -1,0 +1,12 @@
+br/gov/mt/seplag/cadastro_servidores/controller/UnidadeController.class
+br/gov/mt/seplag/cadastro_servidores/pessoa/Sexo.class
+br/gov/mt/seplag/cadastro_servidores/controller/ServidorController.class
+br/gov/mt/seplag/cadastro_servidores/endereco/DadosEndereco.class
+br/gov/mt/seplag/cadastro_servidores/CadastroServidoresApplication.class
+br/gov/mt/seplag/cadastro_servidores/endereco/DadosCidade.class
+br/gov/mt/seplag/cadastro_servidores/pessoa/DadosPessoa.class
+br/gov/mt/seplag/cadastro_servidores/unidade/DadosCadastroUnidade.class
+br/gov/mt/seplag/cadastro_servidores/servidor/TipoServidor.class
+br/gov/mt/seplag/cadastro_servidores/servidor/DadosCadastroServidor.class
+br/gov/mt/seplag/cadastro_servidores/controller/LotacaoController.class
+br/gov/mt/seplag/cadastro_servidores/lotacao/DadosCadastroLotacao.class
