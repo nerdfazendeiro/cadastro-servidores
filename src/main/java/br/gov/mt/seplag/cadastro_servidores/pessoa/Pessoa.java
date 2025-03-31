@@ -18,8 +18,15 @@ public class Pessoa {
 
     private String pesNome;
     private LocalDate pesDataNascimento;
-    private String pesSexo;
+    private Sexo pesSexo;
     private String pesMae;
     private String pesPai;
 
+    public Pessoa(DadosPessoa dadosPessoa) {
+        this.pesNome = dadosPessoa.nome();
+        this.pesDataNascimento = dadosPessoa.dataNascimento();
+        this.pesSexo = dadosPessoa.sexo();
+        this.pesMae = dadosPessoa.mae();
+        this.pesPai = dadosPessoa.pai();
+    }
 }

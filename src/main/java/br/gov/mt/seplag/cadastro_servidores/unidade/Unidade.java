@@ -16,4 +16,9 @@ public class Unidade {
 
     private String unidNome;
     private String unidSigla;
+
+    public Unidade(DadosCadastroUnidade dadosUnidade) {
+        this.unidNome = dadosUnidade.nome();
+        this.unidSigla = dadosUnidade.sigla();
+    }
 }

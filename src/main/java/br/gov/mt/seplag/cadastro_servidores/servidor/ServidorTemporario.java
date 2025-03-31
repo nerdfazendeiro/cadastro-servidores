@@ -22,4 +22,10 @@ public class ServidorTemporario {
     @MapsId
     @JoinColumn(name = "pes_id")
     private Pessoa pessoa;
+
+    public ServidorTemporario(DadosCadastroServidor dados) {
+        this.pessoa = new Pessoa(dados.pessoa());
+        this.stDataAdmissao = dados.dataAdmissao();
+        this.stDataDemissao = dados.dataDemissao();
+    }
 }

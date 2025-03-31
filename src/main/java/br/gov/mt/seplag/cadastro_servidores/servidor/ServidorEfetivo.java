@@ -20,4 +20,9 @@ public class ServidorEfetivo {
     @MapsId
     @JoinColumn(name = "pes_id")
     private Pessoa pessoa;
+
+    public ServidorEfetivo(DadosCadastroServidor dados) {
+        this.pessoa = new Pessoa(dados.pessoa());
+        this.seMatricula = dados.matricula();
+    }
 }
