@@ -1,24 +1,37 @@
 package br.gov.mt.seplag.cadastro_servidores.controller;
 
-import br.gov.mt.seplag.cadastro_servidores.unidade.DadosCadastroUnidade;
-import br.gov.mt.seplag.cadastro_servidores.unidade.Unidade;
-import br.gov.mt.seplag.cadastro_servidores.unidade.UnidadeRepository;
+import br.gov.mt.seplag.cadastro_servidores.unidade.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/unidade")
 public class UnidadeController {
 
     @Autowired
-    private UnidadeRepository unidadeRepository;
+    private UnidadeService unidadeService;
 
     @PostMapping
-    public void cadastrar(@RequestBody @Valid DadosCadastroUnidade dados) {
-        unidadeRepository.save(new Unidade(dados));
+    public ResponseEntity<DadosDetalhamentoUnidade> cadastrar(@RequestBody @Valid DadosCadastroUnidade dados) {
+        return ResponseEntity.ok(unidadeService.cadastrar(dados));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhamentoUnidade>> listar(Pageable pageable) {
+        return ResponseEntity.ok(unidadeService.listar(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoUnidade> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(unidadeService.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoUnidade> atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoUnidade dados) {
+        return ResponseEntity.ok(unidadeService.atualizar(id, dados));
     }
 }
