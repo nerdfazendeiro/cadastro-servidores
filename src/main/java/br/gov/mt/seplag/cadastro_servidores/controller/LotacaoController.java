@@ -1,6 +1,9 @@
 package br.gov.mt.seplag.cadastro_servidores.controller;
 
-import br.gov.mt.seplag.cadastro_servidores.lotacao.*;
+import br.gov.mt.seplag.cadastro_servidores.domain.lotacao.DadosAtualizacaoLotacao;
+import br.gov.mt.seplag.cadastro_servidores.domain.lotacao.DadosCadastroLotacao;
+import br.gov.mt.seplag.cadastro_servidores.domain.lotacao.DadosDetalhamentoLotacao;
+import br.gov.mt.seplag.cadastro_servidores.domain.lotacao.LotacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

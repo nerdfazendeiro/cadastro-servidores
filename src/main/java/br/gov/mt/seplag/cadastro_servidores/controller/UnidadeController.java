@@ -1,6 +1,9 @@
 package br.gov.mt.seplag.cadastro_servidores.controller;
 
-import br.gov.mt.seplag.cadastro_servidores.unidade.*;
+import br.gov.mt.seplag.cadastro_servidores.domain.unidade.DadosAtualizacaoUnidade;
+import br.gov.mt.seplag.cadastro_servidores.domain.unidade.DadosCadastroUnidade;
+import br.gov.mt.seplag.cadastro_servidores.domain.unidade.DadosDetalhamentoUnidade;
+import br.gov.mt.seplag.cadastro_servidores.domain.unidade.UnidadeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
