@@ -29,11 +29,4 @@ public class Lotacao {
     @JoinColumn(name = "unid_id")
     private Unidade unidade;
 
-    public Lotacao(DadosCadastroLotacao dados) {
-        this.pessoa = new Pessoa(dados.pessoa());
-        this.unidade = new Unidade(dados.unidade());
-        this.lotDataLotacao = dados.dataLotacao();
-        this.lotDataRemocao = dados.dataRemocao();
-        this.lotPortaria = dados.portaria();
-    }
 }

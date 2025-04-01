@@ -1,25 +1,38 @@
 package br.gov.mt.seplag.cadastro_servidores.controller;
 
-import br.gov.mt.seplag.cadastro_servidores.lotacao.DadosCadastroLotacao;
-import br.gov.mt.seplag.cadastro_servidores.lotacao.Lotacao;
-import br.gov.mt.seplag.cadastro_servidores.lotacao.LotacaoRepository;
+import br.gov.mt.seplag.cadastro_servidores.lotacao.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/lotacao")
 public class LotacaoController {
 
     @Autowired
-    private LotacaoRepository lotacaoRepository;
+    private LotacaoService lotacaoService;
 
     @PostMapping
-    public void cadastrar(@RequestBody @Valid DadosCadastroLotacao dados) {
-        lotacaoRepository.save(new Lotacao(dados));
+    public ResponseEntity<DadosDetalhamentoLotacao> cadastrar(@RequestBody @Valid DadosCadastroLotacao dados) {
+        return ResponseEntity.ok(lotacaoService.cadastrar(dados));
     }
 
+    @GetMapping
+    public ResponseEntity<List<DadosDetalhamentoLotacao>> listarTodos() {
+        return ResponseEntity.ok(lotacaoService.listarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoLotacao> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(lotacaoService.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoLotacao> atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoLotacao dados) {
+        return ResponseEntity.ok(lotacaoService.atualizar(id, dados));
+    }
 }
+

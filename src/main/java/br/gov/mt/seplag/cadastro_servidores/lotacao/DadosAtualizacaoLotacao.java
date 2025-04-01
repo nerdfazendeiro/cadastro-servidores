@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record DadosCadastroLotacao(
+public record DadosAtualizacaoLotacao(
         @NotNull Long pessoaId,
         @NotNull Long unidadeId,
         @NotNull LocalDate dataLotacao,
