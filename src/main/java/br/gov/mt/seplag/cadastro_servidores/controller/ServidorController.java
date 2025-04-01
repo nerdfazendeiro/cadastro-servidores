@@ -6,8 +6,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -17,10 +19,14 @@ public class ServidorController {
     @Autowired
     private ServidorService servidorService;
 
-    @PostMapping
+    @PostMapping(value = "/com-foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroServidor dados) {
-        servidorService.cadastrar(dados);
+    public ResponseEntity<Void> cadastrar(
+            @RequestPart @Valid DadosCadastroServidor dados,
+            @RequestPart("foto") MultipartFile foto
+    ) {
+        servidorService.cadastrarComFoto(dados, foto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping

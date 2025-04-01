@@ -3,6 +3,7 @@ package br.gov.mt.seplag.cadastro_servidores.servidor;
 import br.gov.mt.seplag.cadastro_servidores.endereco.Cidade;
 import br.gov.mt.seplag.cadastro_servidores.endereco.DadosEndereco;
 import br.gov.mt.seplag.cadastro_servidores.endereco.Endereco;
+import br.gov.mt.seplag.cadastro_servidores.foto.FotoService;
 import br.gov.mt.seplag.cadastro_servidores.pessoa.Pessoa;
 import br.gov.mt.seplag.cadastro_servidores.pessoa.PessoaEndereco;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -22,8 +24,10 @@ public class ServidorService {
     private ServidorEfetivoRepository servidorEfetivoRepository;
     @Autowired
     private ServidorTemporarioRepository servidorTemporarioRepository;
+    @Autowired
+    private FotoService fotoService;
 
-    public void cadastrar(DadosCadastroServidor dados) {
+    public void cadastrarComFoto(DadosCadastroServidor dados, MultipartFile foto) {
         Pessoa pessoa = new Pessoa(dados.pessoa());
         Endereco endereco = new Endereco(dados.endereco());
         Cidade cidade = new Cidade(dados.endereco().cidade());
@@ -41,6 +45,7 @@ public class ServidorService {
             servidorTemporarioRepository.save(new ServidorTemporario(dados, pessoa));
             System.out.println("Servidor Temporario cadastrado com sucesso!");
         }
+        fotoService.salvarFotoPessoa(foto, pessoa);
     }
 
     public Object buscarPorTipoEId(TipoServidor tipo, Long id) {

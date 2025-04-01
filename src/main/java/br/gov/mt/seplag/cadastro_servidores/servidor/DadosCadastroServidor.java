@@ -3,7 +3,6 @@ package br.gov.mt.seplag.cadastro_servidores.servidor;
 import br.gov.mt.seplag.cadastro_servidores.endereco.DadosEndereco;
 import br.gov.mt.seplag.cadastro_servidores.pessoa.DadosPessoa;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
