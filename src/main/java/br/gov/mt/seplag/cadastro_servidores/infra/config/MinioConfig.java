@@ -1,4 +1,4 @@
-package br.gov.mt.seplag.cadastro_servidores.config;
+package br.gov.mt.seplag.cadastro_servidores.infra.config;
 
 import io.minio.MinioClient;
 import org.springframework.beans.factory.annotation.Value;
